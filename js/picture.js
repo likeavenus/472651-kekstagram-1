@@ -13,7 +13,7 @@ function getRandomNumber(min, max) {
 var getRandomUrl = function () {
   var url =  'photos/' + getRandomNumber(1, 25) + '.jpg';
   return url;
-}
+};
 
 var renderObjs = function (quantity) {
   for (var i = 0; i < quantity; i++) {
@@ -27,7 +27,7 @@ var renderObjs = function (quantity) {
     );
   }
   return posts;
-}
+};
 
 var picture = document.querySelector('#picture')
     .content
@@ -41,7 +41,7 @@ var renderPost = function (post) {
   postElement.querySelector('.picture__likes').textContent = post.likes;
   postElement.querySelector('.picture__comments').textContent = post.comments;
   return postElement;
-}
+};
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < OBJS; i++) {
   renderObjs(OBJS);
@@ -54,9 +54,9 @@ bigPic.classList.remove('hidden');
 
 var bigPicture = bigPic.querySelector('img');
 var getRandomPicture = function () {
-    bigPicture.src = getRandomUrl();
-    return bigPicture.src;
-}
+  bigPicture.src = getRandomUrl();
+  return bigPicture.src;
+};
 
 var comment = document.querySelector('.comments-count');
 var like = document.querySelector('.likes-count');
@@ -70,7 +70,7 @@ var renderBigPost = function () {
   commentText.textContent = comments[getRandomNumber(0, 2)];
   photoDescription.textContent = descriptions;
   getRandomPicture();
-}
+};
 renderBigPost();
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
