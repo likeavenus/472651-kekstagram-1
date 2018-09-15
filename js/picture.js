@@ -66,11 +66,11 @@ var like = document.querySelector('.likes-count');
 var socialPicture = document.querySelector('.social__picture');
 var commentText = document.querySelector('.social__text');
 var photoDescription = document.querySelector('.social__caption');
-var renderBigPost = function (comment, likes, avatar, commentText, description) {
-  comment.textContent = getRandomNumber(15, 100);
+var renderBigPost = function (comments, likes, avatar, commentsText, description) {
+  comments.textContent = getRandomNumber(15, 100);
   likes.textContent = getRandomNumber(15, 200);
   avatar.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
-  commentText.textContent = comments[getRandomNumber(0, 2)];
+  commentsText.textContent = comments[getRandomNumber(0, 2)];
   description.textContent = descriptions;
   getRandomPicture();
 };
