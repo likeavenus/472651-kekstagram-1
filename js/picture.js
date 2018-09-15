@@ -66,15 +66,15 @@ var like = document.querySelector('.likes-count');
 var socialPicture = document.querySelector('.social__picture');
 var commentText = document.querySelector('.social__text');
 var photoDescription = document.querySelector('.social__caption');
-var renderBigPost = function () {
+var renderBigPost = function (comment, likes, avatar, commentText, description) {
   comment.textContent = getRandomNumber(15, 100);
-  like.textContent = getRandomNumber(15, 200);
-  socialPicture.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
+  likes.textContent = getRandomNumber(15, 200);
+  avatar.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
   commentText.textContent = comments[getRandomNumber(0, 2)];
-  photoDescription.textContent = descriptions;
+  description.textContent = descriptions;
   getRandomPicture();
 };
-renderBigPost();
+renderBigPost(comment, like, socialPicture, commentText, photoDescription);
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
