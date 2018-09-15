@@ -1,5 +1,5 @@
 'use strict';
-var OBJS = 25;
+var OBJS = 26;
 var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 var descriptions = 'Отдыхаем...';
 var posts = [];
@@ -9,17 +9,19 @@ function getRandomNumber(min, max) {
   rand = Math.floor(rand);
   return rand;
 }
-
-var getRandomUrl = function () {
-  var url =  'photos/' + getRandomNumber(1, 25) + '.jpg';
-  return url;
-};
+// var url;
+// var getUrl = function (quantity) {
+//   for (var i = 0; i <= quantity; i++) {
+//      url = 'photos/' + (i++) + '.jpg';
+//   }
+//   return url;
+// };
 
 var renderObjs = function (quantity) {
-  for (var i = 0; i < quantity; i++) {
+  for (var i = 1; i < quantity; i++) {
     posts.push(
         {
-          url: getRandomUrl(),
+          url: 'photos/' + i + '.jpg',
           likes: getRandomNumber(15, 100),
           comments: comments[getRandomNumber(0, comments.length - 1)],
           descriptions: descriptions
@@ -42,9 +44,10 @@ var renderPost = function (post) {
   postElement.querySelector('.picture__comments').textContent = post.comments;
   return postElement;
 };
+
+renderObjs(OBJS);
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < OBJS; i++) {
-  renderObjs(OBJS);
   fragment.appendChild(renderPost(posts[i]));
 }
 pics.appendChild(fragment);
@@ -54,7 +57,7 @@ bigPic.classList.remove('hidden');
 
 var bigPicture = bigPic.querySelector('img');
 var getRandomPicture = function () {
-  bigPicture.src = getRandomUrl();
+  bigPicture.src = getUrl(25);
   return bigPicture.src;
 };
 
