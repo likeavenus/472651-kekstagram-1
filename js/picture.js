@@ -22,7 +22,7 @@ var renderObjs = function (quantity) {
     posts.push(
         {
           url: 'photos/' + i + '.jpg',
-          likes: getRandomNumber(15, 100),
+          likes: getRandomNumber(15, 200),
           comments: comments[getRandomNumber(0, comments.length - 1)],
           descriptions: descriptions
         }
@@ -47,7 +47,7 @@ var renderPost = function (post) {
 
 renderObjs(OBJS);
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < OBJS; i++) {
+for (var i = 0; i < posts.length; i++) {
   fragment.appendChild(renderPost(posts[i]));
 }
 pics.appendChild(fragment);
@@ -57,7 +57,7 @@ bigPic.classList.remove('hidden');
 
 var bigPicture = bigPic.querySelector('img');
 var getRandomPicture = function () {
-  bigPicture.src = getUrl(25);
+  bigPicture.src = 'img/logo-background-3.jpg';
   return bigPicture.src;
 };
 
@@ -68,7 +68,7 @@ var commentText = document.querySelector('.social__text');
 var photoDescription = document.querySelector('.social__caption');
 var renderBigPost = function () {
   comment.textContent = getRandomNumber(15, 100);
-  like.textContent = getRandomNumber(15, 100);
+  like.textContent = getRandomNumber(15, 200);
   socialPicture.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
   commentText.textContent = comments[getRandomNumber(0, 2)];
   photoDescription.textContent = descriptions;
