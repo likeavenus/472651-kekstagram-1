@@ -9,13 +9,6 @@ function getRandomNumber(min, max) {
   rand = Math.floor(rand);
   return rand;
 }
-// var url;
-// var getUrl = function (quantity) {
-//   for (var i = 0; i <= quantity; i++) {
-//      url = 'photos/' + (i++) + '.jpg';
-//   }
-//   return url;
-// };
 
 var renderObjs = function (quantity) {
   for (var i = 1; i < quantity; i++) {
@@ -55,26 +48,25 @@ pics.appendChild(fragment);
 var bigPic = document.querySelector('.big-picture');
 bigPic.classList.remove('hidden');
 
-var bigPicture = bigPic.querySelector('img');
-var getRandomPicture = function () {
-  bigPicture.src = 'img/logo-background-3.jpg';
-  return bigPicture.src;
-};
+var commentsList = document.querySelector('.social__comments');
+commentsList.parentNode.removeChild('li');
 
-var comment = document.querySelector('.comments-count');
-var like = document.querySelector('.likes-count');
-var socialPicture = document.querySelector('.social__picture');
-var commentText = document.querySelector('.social__text');
-var photoDescription = document.querySelector('.social__caption');
-var renderBigPost = function (commentsQuantity, likes, avatar, commentsText, description) {
-  commentsQuantity.textContent = getRandomNumber(15, 100);
-  likes.textContent = getRandomNumber(15, 200);
+var socialComment = document.createElement('li');
+var avatar = document.createElement('img');
+var socialText = document.createElement('p');
+
+var renderBigPost = function () {
+  socialComment.classList.add('social__comment');
+  avatar.classList.add('social__picture');
   avatar.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
-  commentsText.textContent = comments[getRandomNumber(0, 2)];
-  description.textContent = descriptions;
-  getRandomPicture();
+  socialText.classList.add('social__text');
+  socialText.textContent = comments[getRandomNumber(0, 2)];
+
+  socialComment.appendChild(avatar);
+  socialComment.appendChild(socialText);
+  commentsList.appendChild(socialComment);
 };
-renderBigPost(comment, like, socialPicture, commentText, photoDescription);
+renderBigPost();
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
