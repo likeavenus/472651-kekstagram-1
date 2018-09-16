@@ -61,9 +61,9 @@ var renderBigPost = function () {
   socialComment.classList.add('social__comment');
   avatar.classList.add('social__picture');
   avatar.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
-  avatar.setAttribute('alt', "Аватар комментатора фотографии");
-  avatar.setAttribute('width', "35");
-  avatar.setAttribute('height', "35");
+  avatar.setAttribute('alt', 'Аватар комментатора фотографии');
+  avatar.setAttribute('width', '35');
+  avatar.setAttribute('height', '35');
   socialText.classList.add('social__text');
   socialText.textContent = comments[getRandomNumber(0, 2)];
   socialCaption.textContent = descriptions;
