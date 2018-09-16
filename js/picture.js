@@ -1,7 +1,7 @@
 'use strict';
-var OBJS = 26;
-var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.'];
-var descriptions = 'Отдыхаем...';
+var OBJS = 25;
+var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
+var descriptions = ['Отдыхаем...', 'Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 var posts = [];
 
 function getRandomNumber(min, max) {
@@ -11,22 +11,18 @@ function getRandomNumber(min, max) {
 }
 
 var renderObjs = function (quantity) {
-  for (var i = 1; i < quantity; i++) {
-    posts.push(
-        {
-          url: 'photos/' + i + '.jpg',
-          likes: getRandomNumber(15, 200),
-          comments: comments.length,
-          descriptions: descriptions
-        }
-    );
+  for (var i = 0; i < quantity; i++) {
+    posts.push({
+      url: 'photos/' + (i + 1) + '.jpg',
+      likes: getRandomNumber(15, 200),
+      comments: comments[getRandomNumber(0, 5)],
+      descriptions: descriptions[getRandomNumber(0, 5)]
+    });
   }
   return posts;
 };
 
-var picture = document.querySelector('#picture')
-    .content
-    .querySelector('.picture');
+var picture = document.querySelector('#picture').content.querySelector('.picture');
 
 var pics = document.querySelector('.pictures');
 
@@ -49,15 +45,15 @@ var bigPic = document.querySelector('.big-picture');
 bigPic.classList.remove('hidden');
 
 var commentsList = document.querySelector('.social__comments');
-// commentsList.removeChild('li');
+commentsList.innerHTML = '';
 
-var socialComment = document.createElement('li');
-var avatar = document.createElement('img');
-var socialText = document.createElement('p');
+var socialComment;
+var avatar;
+var socialText;
+var socialCaption;
+var likesCount = document.querySelector('.likes-count');
 
-var socialCaption = document.querySelector('.social__caption');
-
-var renderBigPost = function () {
+var addData = function () {
   socialComment.classList.add('social__comment');
   avatar.classList.add('social__picture');
   avatar.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
@@ -65,14 +61,29 @@ var renderBigPost = function () {
   avatar.setAttribute('width', '35');
   avatar.setAttribute('height', '35');
   socialText.classList.add('social__text');
-  socialText.textContent = comments;
-  socialCaption.textContent = descriptions;
+  return socialComment;
+}
 
+var createListElement = function (post) {
+  socialComment = document.createElement('li');
+  avatar = document.createElement('img');
+  socialText = document.createElement('p');
+  socialCaption = document.querySelector('.social__caption');
   socialComment.appendChild(avatar);
   socialComment.appendChild(socialText);
   commentsList.appendChild(socialComment);
+  socialText.textContent = post.comments;
+  socialCaption.textContent = post.descriptions;
+  likesCount.textContent = post.likes;
+  addData();
+  return socialComment;
 };
-renderBigPost();
+createListElement(posts);
+
+for (var i = 0; i < 3; i++) {
+  fragment.appendChild(createListElement(posts[i]));
+}
+commentsList.appendChild(fragment);
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
