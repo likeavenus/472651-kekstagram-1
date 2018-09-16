@@ -1,6 +1,6 @@
 'use strict';
 var OBJS = 26;
-var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
+var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.'];
 var descriptions = 'Отдыхаем...';
 var posts = [];
 
@@ -65,7 +65,7 @@ var renderBigPost = function () {
   avatar.setAttribute('width', '35');
   avatar.setAttribute('height', '35');
   socialText.classList.add('social__text');
-  socialText.textContent = comments[getRandomNumber(0, 2)];
+  socialText.textContent = comments;
   socialCaption.textContent = descriptions;
 
   socialComment.appendChild(avatar);
