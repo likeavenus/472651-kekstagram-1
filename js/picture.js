@@ -49,7 +49,7 @@ var bigPic = document.querySelector('.big-picture');
 bigPic.classList.remove('hidden');
 
 var commentsList = document.querySelector('.social__comments');
-commentsList.parentNode.removeChild('li');
+commentsList.removeChild('li');
 
 var socialComment = document.createElement('li');
 var avatar = document.createElement('img');
