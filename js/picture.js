@@ -46,7 +46,7 @@ bigPic.classList.remove('hidden');
 
 var commentsList = document.querySelector('.social__comments');
 commentsList.innerHTML = '';
-var createListElement = function (post) {
+var createListElement = function () {
   var socialComment = document.createElement('li');
   var avatar = document.createElement('img');
   var socialText = document.createElement('p');
@@ -59,6 +59,7 @@ var createListElement = function (post) {
   avatar.setAttribute('width', '35');
   avatar.setAttribute('height', '35');
   socialText.classList.add('social__text');
+  socialText.textContent = posts.comments;
 
   socialComment.appendChild(avatar);
   socialComment.appendChild(socialText);
@@ -70,10 +71,10 @@ var renderBigPost = function () {
   var commentsText = document.querySelector('.social__text');
   var photoDescriptions = document.querySelector('.social__caption');
   var likesOnPhoto = document.querySelector('.likes-count');
-  for (var i = 0; i < 20; i++) {
-    fragment.appendChild(createListElement(posts[i]));
-    commentsText.textContent = posts[i].comments;
-    photoDescriptions.textContent = posts[i].descriptions;
+  for (var i = 0; i < posts.comments[i]; i++) {
+    fragment.appendChild(createListElement());
+    commentsText.textContent = posts.comments[i];
+    photoDescriptions.textContent = posts.descriptions[i];
     likesOnPhoto.textContent = getRandomNumber(15, 200);
   }
 }
