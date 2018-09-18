@@ -51,7 +51,7 @@ var createListElement = function (post) {
   var avatar = document.createElement('img');
   var socialText = document.createElement('p');
   var socialCaption = document.querySelector('.social__caption');
-  var likesCount = document.querySelector('.likes-count'); 
+  var likesCount = document.querySelector('.likes-count');
   socialComment.classList.add('social__comment');
   avatar.classList.add('social__picture');
   avatar.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
@@ -63,21 +63,21 @@ var createListElement = function (post) {
   socialComment.appendChild(avatar);
   socialComment.appendChild(socialText);
   commentsList.appendChild(socialComment);
-  socialText.textContent = comments;
-  socialCaption.textContent = descriptions;
-  likesCount.textContent = getRandomNumber(15, 200);
   return socialComment;
 };
 
 var renderBigPost = function () {
-  
-  for (var i = 0; i < 3; i++) {
+  var commentsText = document.querySelector('.social__text');
+  var photoDescriptions = document.querySelector('.social__caption');
+  var likesOnPhoto = document.querySelector('.likes-count');
+  for (var i = 0; i < 20; i++) {
     fragment.appendChild(createListElement(posts[i]));
+    commentsText.textContent = posts[i].comments;
+    photoDescriptions.textContent = posts[i].descriptions;
+    likesOnPhoto.textContent = getRandomNumber(15, 200);
   }
 }
 renderBigPost();
-
-
 commentsList.appendChild(fragment);
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
