@@ -52,7 +52,7 @@ var getPhotoDescription = function () {
   var likesCount = document.querySelector('.likes-count');
   likesCount.textContent = getRandomNumber(15, 200);
   socialCaption.textContent = descriptions[0];
-}
+};
 
 var createListElement = function (comment) {
   var socialComment = document.createElement('li');
@@ -81,7 +81,7 @@ var renderBigPost = function (post) {
   }
   commentsList.appendChild(bigPostFragment);
   getPhotoDescription();
-}
+};
 renderBigPost(posts[0]);
 
 
