@@ -46,12 +46,19 @@ bigPic.classList.remove('hidden');
 
 var commentsList = document.querySelector('.social__comments');
 commentsList.innerHTML = '';
-var createListElement = function () {
+
+var getPhotoDescription = function () {
+  var socialCaption = document.querySelector('.social__caption');
+  var likesCount = document.querySelector('.likes-count');
+  likesCount.textContent = getRandomNumber(15, 200);
+  socialCaption.textContent = descriptions[0];
+}
+
+var createListElement = function (comment) {
   var socialComment = document.createElement('li');
   var avatar = document.createElement('img');
   var socialText = document.createElement('p');
-  var socialCaption = document.querySelector('.social__caption');
-  var likesCount = document.querySelector('.likes-count');
+
   socialComment.classList.add('social__comment');
   avatar.classList.add('social__picture');
   avatar.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
@@ -59,7 +66,7 @@ var createListElement = function () {
   avatar.setAttribute('width', '35');
   avatar.setAttribute('height', '35');
   socialText.classList.add('social__text');
-  socialText.textContent = posts.comments;
+  socialText.textContent = comment;
 
   socialComment.appendChild(avatar);
   socialComment.appendChild(socialText);
@@ -67,19 +74,16 @@ var createListElement = function () {
   return socialComment;
 };
 
-var renderBigPost = function () {
-  var commentsText = document.querySelector('.social__text');
-  var photoDescriptions = document.querySelector('.social__caption');
-  var likesOnPhoto = document.querySelector('.likes-count');
-  for (var i = 0; i < posts.comments[i]; i++) {
-    fragment.appendChild(createListElement());
-    commentsText.textContent = posts.comments[i];
-    photoDescriptions.textContent = posts.descriptions[i];
-    likesOnPhoto.textContent = getRandomNumber(15, 200);
+var renderBigPost = function (post) {
+  var bigPostFragment = document.createDocumentFragment();
+  for (var i = 0; i < post.comments.length; i++) {
+    bigPostFragment.appendChild(createListElement(post.comments[i]));
   }
+  commentsList.appendChild(bigPostFragment);
+  getPhotoDescription();
 }
-renderBigPost();
-commentsList.appendChild(fragment);
+renderBigPost(posts[0]);
+
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
