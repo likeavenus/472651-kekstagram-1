@@ -70,7 +70,6 @@ var createListElement = function (comment) {
 
   socialComment.appendChild(avatar);
   socialComment.appendChild(socialText);
-  commentsList.appendChild(socialComment);
   return socialComment;
 };
 
