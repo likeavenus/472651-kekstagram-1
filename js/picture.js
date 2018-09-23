@@ -101,19 +101,19 @@ var onPopupEscPress = function (evt) {
 
 uploadFile.addEventListener('change', function () {
   openPopup();
-})
+});
 
 cancelSetup.addEventListener('click', function () {
   closePopup();
   uploadFile.value = '';
-})
+});
 
 var openPopup = function () {
   setupWindow.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
-var closePopup = function (event) {
+var closePopup = function () {
   setupWindow.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 };
