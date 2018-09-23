@@ -40,7 +40,7 @@ for (var i = 0; i < posts.length; i++) {
 }
 pics.appendChild(fragment);
 
-var bigPic = document.querySelector('.big-picture');
+// var bigPic = document.querySelector('.big-picture');
 
 var commentsList = document.querySelector('.social__comments');
 commentsList.innerHTML = '';
