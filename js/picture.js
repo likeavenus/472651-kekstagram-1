@@ -85,42 +85,46 @@ renderBigPost(posts[0]);
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
 
-var setupPhoto = document.querySelector('.img-upload__overlay');
+var setupWindow = document.querySelector('.img-upload__overlay');
+var cancelSetup = document.querySelector('.cancel');
+var uploadFile = document.querySelector('#upload-file');
+var hashtags = document.querySelector('.text__hashtags');
+var textDescription = document.querySelector('.text__description');
+var ESC_KEYCODE = 27;
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
+    uploadFile.value = '';
   }
 };
 
+uploadFile.addEventListener('change', function () {
+  openPopup();
+})
+
+cancelSetup.addEventListener('click', function () {
+  closePopup();
+  uploadFile.value = '';
+})
+
 var openPopup = function () {
-  setupPhoto.classList.remove('hidden');
+  setupWindow.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
-  popupOpened = true;
 };
 
-var closePopup = function () {
-  setupPhoto.classList.add('hidden');
+var closePopup = function (event) {
+  setupWindow.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
-  popupOpened = false;
 };
 
-// setupOpen.addEventListener('click', function () {
-//   openPopup();
-// });
-
-// setupOpen.addEventListener('keydown', function (evt) {
-//   if (evt.keyCode === ENTER_KEYCODE) {
-//     openPopup();
-//   }
-// });
-
-// setupClose.addEventListener('click', function () {
-//   closePopup();
-// });
-
-// setupClose.addEventListener('keydown', function (evt) {
-//   if (evt.keyCode === ENTER_KEYCODE) {
-//     closePopup();
-//   }
-// });
+var onFocusInput = function (currentInput) {
+  currentInput.onfocus = function () {
+    document.removeEventListener('keydown', onPopupEscPress);
+  };
+  currentInput.onblur = function () {
+    document.addEventListener('keydown', onPopupEscPress);
+  };
+};
+onFocusInput(hashtags);
+onFocusInput(textDescription);
