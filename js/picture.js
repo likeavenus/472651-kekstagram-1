@@ -41,7 +41,6 @@ for (var i = 0; i < posts.length; i++) {
 pics.appendChild(fragment);
 
 var bigPic = document.querySelector('.big-picture');
-bigPic.classList.remove('hidden');
 
 var commentsList = document.querySelector('.social__comments');
 commentsList.innerHTML = '';
@@ -85,3 +84,43 @@ renderBigPost(posts[0]);
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
+
+var setupPhoto = document.querySelector('.img-upload__overlay');
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setupPhoto.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+  popupOpened = true;
+};
+
+var closePopup = function () {
+  setupPhoto.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+  popupOpened = false;
+};
+
+// setupOpen.addEventListener('click', function () {
+//   openPopup();
+// });
+
+// setupOpen.addEventListener('keydown', function (evt) {
+//   if (evt.keyCode === ENTER_KEYCODE) {
+//     openPopup();
+//   }
+// });
+
+// setupClose.addEventListener('click', function () {
+//   closePopup();
+// });
+
+// setupClose.addEventListener('keydown', function (evt) {
+//   if (evt.keyCode === ENTER_KEYCODE) {
+//     closePopup();
+//   }
+// });
