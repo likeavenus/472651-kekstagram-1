@@ -133,8 +133,16 @@ var effectPin = document.querySelector('.effect-level__pin');
 var PIN_START = 0;
 var PIN_END = 453;
 var PIN_SHIFT = effectPin.offsetLeft;
+var effectsList = document.querySelector('.effects__list');
+var effectsItem = document.querySelectorAll('.effects__item');
+
+
+effectsList.addEventListener('click', function (e) {
+  console.log(e.target.parentNode);
+})
 
 effectPin.addEventListener('click', function () {
   console.log(PIN_SHIFT)
   console.log(effectPin.offsetLeft);
+  //Разные значения ???
 });
