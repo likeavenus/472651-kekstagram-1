@@ -128,3 +128,12 @@ var onFocusInput = function (currentInput) {
 };
 onFocusInput(hashtags);
 onFocusInput(textDescription);
+
+var effectPin = document.querySelector('.effect-level__pin');
+var PIN_START = 0;
+var PIN_END = 453;
+var PIN_SHIFT = effectPin.offsetLeft;
+
+effectPin.addEventListener('click', function () {
+  console.log(PIN_SHIFT)
+})
