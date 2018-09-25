@@ -136,4 +136,5 @@ var PIN_SHIFT = effectPin.offsetLeft;
 
 effectPin.addEventListener('click', function () {
   console.log(PIN_SHIFT)
-})
+  console.log(effectPin.offsetLeft);
+});
