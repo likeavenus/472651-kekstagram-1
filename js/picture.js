@@ -139,10 +139,10 @@ var effectsItem = document.querySelectorAll('.effects__item');
 
 effectsList.addEventListener('click', function (e) {
   console.log(e.target.parentNode);
-})
+});
 
 effectPin.addEventListener('click', function () {
-  console.log(PIN_SHIFT)
+  console.log(PIN_SHIFT);
   console.log(effectPin.offsetLeft);
   //Разные значения ???
 });
