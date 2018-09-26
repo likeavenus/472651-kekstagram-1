@@ -178,22 +178,10 @@ effectsList.addEventListener('click', function (e) {
       imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
       if (currentFilter === 'none') {
         imageUpload.style.filter = '';
-      }
-      if (currentFilter === 'chrome') {
+      } else {
         imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
-      }
-      if (currentFilter === 'sepia') {
-        imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
-      }
-      if (currentFilter === 'marvin') {
-        imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
-      }
-      if (currentFilter === 'heat') {
-        imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
-      }
    }
-})
-
+}});
 effectPin.addEventListener('mouseup', function (e) {
   console.log(effectPin.offsetLeft);
 });
