@@ -170,19 +170,14 @@ var effects = {
   }
 };
 
-
 effectsList.addEventListener('click', function (e) {
   if (e.target.tagName === 'INPUT') {
     var currentFilter = document.querySelector('.effects__radio:checked').value;
     var filterEffects = effects[currentFilter];
-    imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
     if (currentFilter === 'none') {
       imageUpload.style.filter = '';
     } else {
       imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
     }
   }
-});
-effectPin.addEventListener('mouseup', function () {
-  console.log(effectPin.offsetLeft);
 });
