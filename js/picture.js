@@ -135,15 +135,64 @@ var PIN_END = 453;
 var effectsList = document.querySelector('.effects__list');
 var effectsItem = document.querySelector('.effects__item');
 var uploadForm = document.querySelector('.img-upload__form');
+var imageUpload = document.querySelector('.img-upload__preview img');
+var effects = {
+  phobos: {
+    min: 0,
+    max: 3,
+    units: 'px',
+    filterName: 'blur'
+  },
+  none: {},
+  chrome: {
+    min: 0,
+    max: 1,
+    units: '',
+    filterName: 'grayscale'
+  },
+  sepia: {
+    min: 0,
+    max: 1,
+    units: '',
+    filterName: 'sepia'
+  },
+  marvin: {
+    min: 0,
+    max: 100,
+    units: '%',
+    filterName: 'invert'
+  },
+  heat: {
+    min: 1,
+    max: 3,
+    units: '',
+    filterName: 'brightness'
+  }
+};
 
-uploadForm.addEventListener('click', function (e) {
-  var currentEffect = document.querySelector('.effects__radio:checked').value;
-  console.log(e.target);
-  console.log(currentEffect);
 
-  // if (e.target === )
+effectsList.addEventListener('click', function (e) {
+  if (e.target.tagName === 'INPUT') {
+    var currentFilter = document.querySelector('.effects__radio:checked').value;
+    var filterEffects = effects[currentFilter];
+      imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
+      if (currentFilter === 'none') {
+        imageUpload.style.filter = '';
+      }
+      if (currentFilter === 'chrome') {
+        imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
+      }
+      if (currentFilter === 'sepia') {
+        imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
+      }
+      if (currentFilter === 'marvin') {
+        imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
+      }
+      if (currentFilter === 'heat') {
+        imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
+      }
+   }
 })
-
 
 effectPin.addEventListener('mouseup', function (e) {
   console.log(effectPin.offsetLeft);
