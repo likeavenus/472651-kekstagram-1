@@ -132,17 +132,19 @@ onFocusInput(textDescription);
 var effectPin = document.querySelector('.effect-level__pin');
 var PIN_START = 0;
 var PIN_END = 453;
-var PIN_SHIFT = effectPin.offsetLeft;
 var effectsList = document.querySelector('.effects__list');
-var effectsItem = document.querySelectorAll('.effects__item');
+var effectsItem = document.querySelector('.effects__item');
+var uploadForm = document.querySelector('.img-upload__form');
+
+uploadForm.addEventListener('click', function (e) {
+  var currentEffect = document.querySelector('.effects__radio:checked').value;
+  console.log(e.target);
+  console.log(currentEffect);
+
+  // if (e.target === )
+})
 
 
-effectsList.addEventListener('click', function (e) {
-  console.log(e.target.parentNode);
-});
-
-effectPin.addEventListener('click', function () {
-  console.log(PIN_SHIFT);
+effectPin.addEventListener('mouseup', function (e) {
   console.log(effectPin.offsetLeft);
-  //Разные значения ???
 });
