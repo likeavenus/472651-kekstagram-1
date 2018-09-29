@@ -170,14 +170,28 @@ var effects = {
   }
 };
 
+var getCurrentInputValue = function () {
+  return document.querySelector('.effects__radio:checked').value;
+}
+
+var getCurrentEffect = function () {
+  var filterEffects = effects[getCurrentInputValue()];
+  getCurrentInputValue() === 'none' ? imageUpload.style.filter = '' : imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
+}
+
 effectsList.addEventListener('click', function (e) {
   if (e.target.tagName === 'INPUT') {
-    var currentFilter = document.querySelector('.effects__radio:checked').value;
-    var filterEffects = effects[currentFilter];
-    if (currentFilter === 'none') {
-      imageUpload.style.filter = '';
-    } else {
-      imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
-    }
+    getCurrentEffect();
   }
 });
+
+effectPin.addEventListener('mouseup' , function (e) {
+
+})
+
+
+
+// var getCurrentEffect = function () {
+//   var filterEffects = effects[getCurrentInputValue()];
+//   getCurrentInputValue() === 'none' ? imageUpload.style.filter = '' : imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
+// }
