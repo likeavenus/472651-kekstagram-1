@@ -174,7 +174,7 @@ var getCurrentInputValue = function () {
   return document.querySelector('.effects__radio:checked').value;
 }
 
-var getCurrentEffect = function () {
+var getCurrentEffect = function (effectsObj) {
   var filterEffects = effects[getCurrentInputValue()];
   getCurrentInputValue() === 'none' ? imageUpload.style.filter = '' : imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
 }
@@ -186,7 +186,8 @@ effectsList.addEventListener('click', function (e) {
 });
 
 effectPin.addEventListener('mouseup' , function (e) {
-
+  var filterEffect = effects[getCurrentInputValue()];
+  imageUpload.style.filter = filterEffect.filterName + '(' + 15 + filterEffect.units + ')';
 })
 
 
