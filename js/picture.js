@@ -29,7 +29,7 @@ var renderPost = function (post) {
   var postElement = picture.cloneNode(true);
   postElement.querySelector('.picture__img').src = post.url;
   postElement.querySelector('.picture__likes').textContent = post.likes;
-  postElement.querySelector('.picture__comments').textContent = post.comments;
+  postElement.querySelector('.picture__comments').textContent = post.comments.length;
   return postElement;
 };
 
@@ -185,12 +185,19 @@ effectsList.addEventListener('click', function (e) {
   }
 });
 
-effectPin.addEventListener('mouseup' , function (e) {
+var getValue = function (max, min, pinPosition, scaleWidth) {
+  var value = pinPosition * (max - min) / scaleWidth + min;
+  return value;
+}
+effectPin.addEventListener('mouseup' , function (evt) {
   var filterEffect = effects[getCurrentInputValue()];
-  imageUpload.style.filter = filterEffect.filterName + '(' + 15 + filterEffect.units + ')';
+  imageUpload.style.filter = filterEffect.filterName + '(' + getValue(filterEffect.max, filterEffect.min, evt.target.offsetLeft, PIN_END) + filterEffect.units + ')';
+  console.log(imageUpload.style.filter);
+  // console.log(evt.target.offsetLeft);
 })
 
 
+// evt.target.offsetLeft текущее значение пина
 
 // var getCurrentEffect = function () {
 //   var filterEffects = effects[getCurrentInputValue()];
