@@ -134,7 +134,6 @@ var PIN_START = 0;
 var PIN_END = 453;
 var effectsList = document.querySelector('.effects__list');
 var effectsItem = document.querySelector('.effects__item');
-var uploadForm = document.querySelector('.img-upload__form');
 var imageUpload = document.querySelector('.img-upload__preview img');
 var effects = {
   phobos: {
@@ -172,12 +171,13 @@ var effects = {
 
 var getCurrentInputValue = function () {
   return document.querySelector('.effects__radio:checked').value;
-}
+};
 
-var getCurrentEffect = function (effectsObj) {
-  var filterEffects = effects[getCurrentInputValue()];
+var filterEffects = effects[getCurrentInputValue()];
+
+var getCurrentEffect = function () {
   getCurrentInputValue() === 'none' ? imageUpload.style.filter = '' : imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
-}
+};
 
 effectsList.addEventListener('click', function (e) {
   if (e.target.tagName === 'INPUT') {
@@ -188,18 +188,13 @@ effectsList.addEventListener('click', function (e) {
 var getValue = function (max, min, pinPosition, scaleWidth) {
   var value = pinPosition * (max - min) / scaleWidth + min;
   return value;
-}
-effectPin.addEventListener('mouseup' , function (evt) {
-  var filterEffect = effects[getCurrentInputValue()];
-  imageUpload.style.filter = filterEffect.filterName + '(' + getValue(filterEffect.max, filterEffect.min, evt.target.offsetLeft, PIN_END) + filterEffect.units + ')';
+};
+
+effectPin.addEventListener('mouseup', function (evt) {
+  imageUpload.style.filter = filterEffects.filterName + '(' + getValue(filterEffects.max, filterEffects.min, evt.target.offsetLeft, PIN_END) + filterEffects.units + ')';
   console.log(imageUpload.style.filter);
-  // console.log(evt.target.offsetLeft);
-})
+});
 
 
 // evt.target.offsetLeft текущее значение пина
 
-// var getCurrentEffect = function () {
-//   var filterEffects = effects[getCurrentInputValue()];
-//   getCurrentInputValue() === 'none' ? imageUpload.style.filter = '' : imageUpload.style.filter = filterEffects.filterName + '(' + filterEffects.max + filterEffects.units + ')';
-// }
