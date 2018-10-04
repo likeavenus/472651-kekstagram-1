@@ -2,6 +2,7 @@
 var OBJS = 25;
 var descriptions = ['Отдыхаем...', 'Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 var posts = [];
+var miniImage = document.querySelectorAll('.picture');
 
 function getRandomNumber(min, max) {
   var rand = min + Math.random() * (max + 1 - min);
@@ -15,8 +16,7 @@ var renderObjs = function (quantity) {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: getRandomNumber(15, 200),
       comments: ['Всё отлично!', 'В целом всё неплохо. Но не всё.'],
-      descriptions: descriptions[getRandomNumber(0, 5)],
-      data: 'data-img="' + (i + 1) + '"'
+      descriptions: descriptions[getRandomNumber(0, 5)]
     });
   }
   return posts;
@@ -35,9 +35,12 @@ var renderPost = function (post) {
 };
 
 renderObjs(OBJS);
+
+
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < posts.length; i++) {
   fragment.appendChild(renderPost(posts[i]));
+  miniImage[i].setAttribute('data-id', i + 1);
 }
 pics.appendChild(fragment);
 
@@ -132,7 +135,6 @@ pics.addEventListener('click', function (e) {
   console.log(e.target.dataset);
   if (e.target.tagName === 'IMG') {
     bigPic.classList.remove('hidden');
-    renderPost(posts[5])
     renderBigPost(posts[1]);
   }
 });
@@ -211,6 +213,7 @@ effectPin.addEventListener('mouseup', function (evt) {
   imageUpload.style.filter = getFilterEffects().filterName + '(' + getValue(getFilterEffects().max, getFilterEffects().min, evt.target.offsetLeft, PIN_END) + getFilterEffects().units + ')';
   console.log(imageUpload.style.filter);
 });
+
 
 
 // evt.target.offsetLeft текущее значение пина
