@@ -2,7 +2,6 @@
 var OBJS = 25;
 var descriptions = ['Отдыхаем...', 'Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 var posts = [];
-var miniImage = document.querySelectorAll('.picture');
 
 function getRandomNumber(min, max) {
   var rand = min + Math.random() * (max + 1 - min);
@@ -26,8 +25,9 @@ var picture = document.querySelector('#picture').content.querySelector('.picture
 
 var pics = document.querySelector('.pictures');
 
-var renderPost = function (post) {
+var renderPost = function (post, index) {
   var postElement = picture.cloneNode(true);
+  postElement.setAttribute('data-id', index);
   postElement.querySelector('.picture__img').src = post.url;
   postElement.querySelector('.picture__likes').textContent = post.likes;
   postElement.querySelector('.picture__comments').textContent = post.comments.length;
@@ -39,8 +39,7 @@ renderObjs(OBJS);
 
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < posts.length; i++) {
-  fragment.appendChild(renderPost(posts[i]));
-  miniImage[i].setAttribute('data-id', i + 1);
+  fragment.appendChild(renderPost(posts[i], i));
 }
 pics.appendChild(fragment);
 
@@ -83,6 +82,23 @@ var renderBigPost = function (post) {
   commentsList.appendChild(bigPostFragment);
   getPhotoDescription();
 };
+
+var linkImage = document.querySelectorAll('.picture');
+var pictureImg = document.querySelectorAll('.picture__img');
+var bigImage = document.querySelector('.big-picture__img img');
+
+pics.addEventListener('click', function (e) {
+
+  if (e.target.parentElement.tagName === 'A') {
+    for (var i = 0; i < linkImage.length; i ++) {
+      if (e.target.parentElement.dataset === linkImage[i].dataset) {
+        bigImage.src = pictureImg[i].getAttribute('src');
+        renderBigPost(posts[i]);
+      }
+    }
+    bigPic.classList.remove('hidden');
+  }
+});
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
@@ -131,13 +147,7 @@ var onFocusInput = function (currentInput) {
 onFocusInput(hashtags);
 onFocusInput(textDescription);
 
-pics.addEventListener('click', function (e) {
-  console.log(e.target.dataset);
-  if (e.target.tagName === 'IMG') {
-    bigPic.classList.remove('hidden');
-    renderBigPost(posts[1]);
-  }
-});
+
 
 var bigPicCancel = document.querySelector('#picture-cancel');
 
