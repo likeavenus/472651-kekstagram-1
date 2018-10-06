@@ -216,3 +216,15 @@ var getValue = function (max, min, pinPosition, scaleWidth) {
 effectPin.addEventListener('mouseup', function (evt) {
   imageUpload.style.filter = getFilterEffects().filterName + '(' + getValue(getFilterEffects().max, getFilterEffects().min, evt.target.offsetLeft, PIN_END) + getFilterEffects().units + ')';
 });
+
+var buttonSubmit = document.querySelector('#upload-submit');
+
+var getValidHashtag = function () {
+  var hashtagValue = hashtags.value;
+  hashtagValue.split('#').splice(0, 1);
+}
+
+hashtags.onblur = function () {
+  getValidHashtag();
+  console.log(getValidHashtag());
+}
