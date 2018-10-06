@@ -150,10 +150,8 @@ onFocusInput(hashtags);
 onFocusInput(textDescription);
 
 var effectPin = document.querySelector('.effect-level__pin');
-
 var PIN_END = 453;
 var effectsList = document.querySelector('.effects__list');
-
 var imageUpload = document.querySelector('.img-upload__preview img');
 var effects = {
   phobos: {
@@ -199,7 +197,9 @@ var getFilterEffects = function () {
 };
 
 var getCurrentEffect = function () {
-  getCurrentInputValue() === 'none' ? imageUpload.style.filter = '' : imageUpload.style.filter = getFilterEffects().filterName + '(' + getFilterEffects().max + getFilterEffects().units + ')';
+  var currentEffect = getCurrentInputValue() === 'none' ? imageUpload.style.filter = '' : imageUpload.style.filter = getFilterEffects().filterName + '(' + getFilterEffects().max + getFilterEffects().units + ')';
+  return currentEffect;
+
 };
 
 effectsList.addEventListener('click', function (e) {
