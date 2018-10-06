@@ -95,6 +95,7 @@ pics.addEventListener('click', function (e) {
         bigImage.src = pictureImg[i].getAttribute('src');
         renderBigPost(posts[i]);
       }
+
     }
     bigPic.classList.remove('hidden');
   }
