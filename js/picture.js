@@ -74,30 +74,31 @@ var createListElement = function (comment) {
   return socialComment;
 };
 
+var bigImage = document.querySelector('.big-picture__img img');
+var bigPicCancel = document.querySelector('#picture-cancel');
+
+var closeBigImage = function () {
+  bigPic.classList.add('hidden');
+  bigPicCancel.removeEventListener('click', closeBigImage);
+};
+
 var renderBigPost = function (post) {
+  bigImage.src = post.url;
   var bigPostFragment = document.createDocumentFragment();
   for (i = 0; i < post.comments.length; i++) {
     bigPostFragment.appendChild(createListElement(post.comments[i]));
   }
   commentsList.appendChild(bigPostFragment);
   getPhotoDescription();
+  bigPic.classList.remove('hidden');
 };
 
-var linkImage = document.querySelectorAll('.picture');
-var pictureImg = document.querySelectorAll('.picture__img');
-var bigImage = document.querySelector('.big-picture__img img');
-
 pics.addEventListener('click', function (e) {
-
-  if (e.target.parentElement.tagName === 'A') {
-    for (var i = 0; i < linkImage.length; i ++) {
-      if (e.target.parentElement.dataset === linkImage[i].dataset) {
-        bigImage.src = pictureImg[i].getAttribute('src');
-        renderBigPost(posts[i]);
-      }
-
-    }
-    bigPic.classList.remove('hidden');
+  bigPicCancel.addEventListener('click', closeBigImage);
+  var currentLink = e.target.parentElement;
+  if (currentLink.tagName === 'A') {
+    var currentLinkId = currentLink.dataset.id;
+    renderBigPost(posts[currentLinkId]);
   }
 });
 
@@ -148,19 +149,11 @@ var onFocusInput = function (currentInput) {
 onFocusInput(hashtags);
 onFocusInput(textDescription);
 
-
-
-var bigPicCancel = document.querySelector('#picture-cancel');
-
-bigPicCancel.addEventListener('click', function () {
-  bigPic.classList.add('hidden');
-});
-
 var effectPin = document.querySelector('.effect-level__pin');
-var PIN_START = 0;
+
 var PIN_END = 453;
 var effectsList = document.querySelector('.effects__list');
-var effectsItem = document.querySelector('.effects__item');
+
 var imageUpload = document.querySelector('.img-upload__preview img');
 var effects = {
   phobos: {
@@ -222,10 +215,4 @@ var getValue = function (max, min, pinPosition, scaleWidth) {
 
 effectPin.addEventListener('mouseup', function (evt) {
   imageUpload.style.filter = getFilterEffects().filterName + '(' + getValue(getFilterEffects().max, getFilterEffects().min, evt.target.offsetLeft, PIN_END) + getFilterEffects().units + ')';
-  console.log(imageUpload.style.filter);
 });
-
-
-
-// evt.target.offsetLeft текущее значение пина
-
