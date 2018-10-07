@@ -221,7 +221,14 @@ var buttonSubmit = document.querySelector('#upload-submit');
 
 var getValidHashtag = function () {
   var hashtagValue = hashtags.value;
+  var hashtagsLength = hashtagValue.split('#').length;
   hashtagValue.split('#').splice(0, 1);
+  for (var i = 0; i < hashtagsLength; i++) {
+    var currentHashtag = hashtagValue[i];
+    if (currentHashtag.charAt(0) !== '#') {
+      console.log('no');
+    }
+  }
 }
 
 hashtags.onblur = function () {
