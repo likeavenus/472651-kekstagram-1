@@ -221,17 +221,20 @@ var buttonSubmit = document.querySelector('#upload-submit');
 
 var getValidHashtag = function () {
   var hashtagValue = hashtags.value;
-  var hashtagsLength = hashtagValue.split('#').length;
-  hashtagValue.split('#').splice(0, 1);
+  var hashtagsArr = hashtagValue.split(' ');
+  var hashtagsLength = hashtagValue.split(' ').length;
+  var currentHashtag;
   for (var i = 0; i < hashtagsLength; i++) {
-    var currentHashtag = hashtagValue[i];
+    currentHashtag = hashtagsArr[i];
     if (currentHashtag.charAt(0) !== '#') {
-      console.log('no');
+      hashtags.setCustomValidity("Хэш-тег начинается со знака '#'!")
     }
   }
 }
+getValidHashtag();
+
+
 
 hashtags.onblur = function () {
-  getValidHashtag();
-  console.log(getValidHashtag());
+
 }
