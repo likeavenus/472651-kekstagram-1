@@ -230,13 +230,13 @@ var getValidHashtag = function () {
 
   for (var i = 0; i < hashtagsLength; i++) {
     var currentHashtag = hashtagsArr[i].toLowerCase();
-    if (currentHashtag[0] !== '#') {
+    if (currentHashtag[0] !== '#' && currentHashtag !== '') {
       errors.push("Хэш-тег начинается со знака '#'!")
     }
-    if (onlyStringRegExp.test(currentHashtag)) {
+    if (onlyStringRegExp.test(currentHashtag) && currentHashtag !== '') {
       errors.push('Хэш-теги разделяются пробелами');
     }
-    if (currentHashtag === currentHashtag) {
+    if (currentHashtag === currentHashtag && currentHashtag !== '') {
       errors.push('Хэш тег должен быть уникальным!');
     }
     if (hashtagsLength > HASHTAGS_LIMIT) {
