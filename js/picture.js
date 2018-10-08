@@ -222,19 +222,37 @@ var buttonSubmit = document.querySelector('#upload-submit');
 var getValidHashtag = function () {
   var hashtagValue = hashtags.value;
   var hashtagsArr = hashtagValue.split(' ');
-  var hashtagsLength = hashtagValue.split(' ').length;
-  var currentHashtag;
+  var hashtagsLength = hashtagsArr.length;
+  var onlyStringRegExp = new RegExp(/([a-z])/);
+  var HASHTAGS_LIMIT = 5;
+  var MAX_SYMBOLS = 20;
+  var errors = [];
+
   for (var i = 0; i < hashtagsLength; i++) {
-    currentHashtag = hashtagsArr[i];
-    if (currentHashtag.charAt(0) !== '#') {
-      hashtags.setCustomValidity("Хэш-тег начинается со знака '#'!")
+    var currentHashtag = hashtagsArr[i].toLowerCase();
+    if (currentHashtag[0] !== '#') {
+      errors.push("Хэш-тег начинается со знака '#'!")
     }
+    if (onlyStringRegExp.test(currentHashtag)) {
+      errors.push('Хэш-теги разделяются пробелами');
+    }
+    if (currentHashtag === currentHashtag) {
+      errors.push('Хэш тег должен быть уникальным!');
+    }
+    if (hashtagsLength > HASHTAGS_LIMIT) {
+      errors.push('Максимальное кол-во хэштегов 5 !');
+    }
+    if (currentHashtag.length > MAX_SYMBOLS) {
+      errors.push('Максимальное кол-во символов 20 !');
+    }
+    hashtags.setCustomValidity(errors.join(', '));
+    console.log(errors)
   }
 }
-getValidHashtag();
+
 
 
 
 hashtags.onblur = function () {
-
+  getValidHashtag();
 }
