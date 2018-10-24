@@ -150,7 +150,9 @@ onFocusInput(hashtags);
 onFocusInput(textDescription);
 
 var effectPin = document.querySelector('.effect-level__pin');
+var effectLevelDepth = document.querySelector('.effect-level__depth');
 var PIN_END = 453;
+var PIN_START = 0;
 var effectsList = document.querySelector('.effects__list');
 var imageUpload = document.querySelector('.img-upload__preview img');
 var effects = {
@@ -213,9 +215,13 @@ var getValue = function (max, min, pinPosition, scaleWidth) {
   return value;
 };
 
-effectPin.addEventListener('mouseup', function (evt) {
-  imageUpload.style.filter = getFilterEffects().filterName + '(' + getValue(getFilterEffects().max, getFilterEffects().min, evt.target.offsetLeft, PIN_END) + getFilterEffects().units + ')';
+
+effectPin.addEventListener('mousedown', function (evt) {
+  document.addEventListener('mousemove', function () {
+     imageUpload.style.filter = getFilterEffects().filterName + '(' + getValue(getFilterEffects().max, getFilterEffects().min, evt.target.offsetLeft, PIN_END) + getFilterEffects().units + ')';
+  });
 });
+
 
 var buttonSubmit = document.querySelector('#upload-submit');
 
@@ -230,13 +236,16 @@ var getValidHashtag = function () {
 
   for (var i = 0; i < hashtagsLength; i++) {
     var currentHashtag = hashtagsArr[i].toLowerCase();
-    if (currentHashtag[0] !== '#' && currentHashtag !== '') {
+    // if (currentHashtag === '') {
+    //   hashtags.setCustomValidity('');
+    // }
+    if (currentHashtag[0] != '#') {
       errors.push("Хэш-тег начинается со знака '#'!")
     }
-    if (onlyStringRegExp.test(currentHashtag) && currentHashtag !== '') {
+    if (onlyStringRegExp.test(currentHashtag) && hashtagsLength < 2) {
       errors.push('Хэш-теги разделяются пробелами');
     }
-    if (currentHashtag === currentHashtag && currentHashtag !== '') {
+    if (currentHashtag === currentHashtag) {
       errors.push('Хэш тег должен быть уникальным!');
     }
     if (hashtagsLength > HASHTAGS_LIMIT) {
@@ -250,9 +259,55 @@ var getValidHashtag = function () {
   }
 }
 
-
-
+// Проверка работает не очень хорошо. Одна буква дает ошибку, что хэш должен быть уникальным. Валидный хэш не проходит.
+// На пустую строку проверяй 1 раз в самом начале - если у тебя пустая строка, нет хэш-тега, то все ок и форму можно отправлять.
+// Если все ок, то ошибку нужно убирать, а ты этого не делаешь. Нужно передать пустую строку методу setCustomValidity
 
 hashtags.onblur = function () {
   getValidHashtag();
 }
+
+var uploadImgWrap = document.querySelector('.img-upload__wrapper');
+
+effectPin.addEventListener('mousedown', function (event) {
+    event.preventDefault();
+
+    var startCoords = {
+        x: event.clientX
+    }
+
+    var onMouseMove = function (moveEvt) {
+      var shift = {
+        x: startCoords.x - moveEvt.clientX
+      }
+
+      startCoords = {
+        x: moveEvt.clientX
+      }
+
+      effectPin.style.left = (effectPin.offsetLeft - shift.x) + 'px';
+
+      var currentPinSize = effectPin.offsetLeft - shift.x;
+
+      if (currentPinSize > PIN_END) {
+        effectPin.style.left = PIN_END + 'px';
+      }
+      if (currentPinSize < PIN_START) {
+        effectPin.style.left = PIN_START + 'px';
+      }
+    }
+
+
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
+
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+});
+
+
